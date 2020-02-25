@@ -1,0 +1,43 @@
+---
+title: "class-2020-02-25"
+author: "William Haslam"
+date: "25/02/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set
+library(tidyverse)
+
+```
+
+```{r}
+
+roll_one_die <- function() {
+  sample(1:6, 1, TRUE)
+  
+}
+
+roll_two_dice <- function() {
+  roll_one_die() + roll_one_die()
+}
+
+
+```
+
+
+```{r}
+
+map_int(1:10, ~ roll_two_dice())
+
+```
+
+
+```{r}
+y = tibble(throws = map_int(rep(1:1000), ~ roll_two_dice()))
+
+
+
+ggplot(y, aes(throws)) + geom_histogram(binwidth = 1)
+```
+
